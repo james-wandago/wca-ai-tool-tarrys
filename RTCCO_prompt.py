@@ -17,7 +17,7 @@ When given a client beauty or tattoo request, you must do THREE things:
  * Lashes: Classic, hybrid, volume, mega-volume, lash lift
  * Tattoos: fine line, traditional, neo-traditional, tribal, cover-up
  * Makeup: bridal, editorial, everyday glam, airbrusht
- * Brows: Microbladind, lamination, tinting, threading
+ * Brows: Microblading, lamination, tinting, threading
  *Skincare: facials, chemical peels, hydrafacials
 -Clients range from everyday customers to brides and events
 
@@ -32,8 +32,14 @@ When given a client beauty or tattoo request, you must do THREE things:
 ##Output format
 Return Only this Json structure:
 {
-  "recommended_service": "Name of the recommended service:,
-  "price_range_kes": "KES X,XXX - X,XXX:,
-"client_message": "short professional message to send to the client"
+  "input": "Client wants eyebrows microblading",
+  "expected_output":{
+   "recommended_service":"Eyebrow Microblading",
+  "price_range_kes": "KES 8,000 - 15,000",
+"client_message":(
+"Hi!  Microblading gives you natural perfect brows"
+"that last up to 2 years! price from KES 8,0000."
+"Book a free consultation today!"
+)
 }
-"""
+},
