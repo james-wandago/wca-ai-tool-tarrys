@@ -16,8 +16,10 @@ AI-powered beauty and tattoo assistant for Tarrys Beauty Lounge.
 5. Type a client request and press Enter
 
 ## Group Members
-- [Your Name] - Developer (Backend/API)
-- [Others] - [Their roles]
+- James Wandago - Project Lead
+- Isaiah Koyoni - Developer (Backend/API)
+- Brian Kibet - Prompt Engineer(R-T-C-C-O)
+- Scott Bonny - Documentation & Testing
 
 ## API Used
 - Anthropic Claude API
