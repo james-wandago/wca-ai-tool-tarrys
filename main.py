@@ -1,12 +1,18 @@
+import os
 import requests
 
-API_KEY = "your_gemini_api_key_here"
+API_KEY = os.getenv("ANTHROPIC_API_KEY")
 
 def get_ai_response(service, client_request):
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={API_KEY}"
-
-    prompt = f"""
-You are a professional beauty and tattoo expert at Tarrys Beauty Lounge in Kenya.
+    url = "https://api.anthropic.com/v1/messages"
+    
+    headers = {
+        "x-api-key": API_KEY,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json"
+    }
+    
+    prompt = f"""You are a professional beauty and tattoo expert at Tarrys Beauty Lounge in Nairobi.
 
 Client wants: {service}
 Request: {client_request}
@@ -14,39 +20,30 @@ Request: {client_request}
 Provide:
 1. Best service recommendation
 2. Price range in Kenyan Shillings (KES)
-3. A short professional message to send to the client
-"""
+3. A short professional message to send to the client"""
 
     data = {
-        "contents": [
-            {
-                "parts": [
-                    {"text": prompt}
-                ]
-            }
+        "model": "claude-sonnet-4-20250514",
+        "max_tokens": 500,
+        "messages": [
+            {"role": "user", "content": prompt}
         ]
     }
-
-    headers = {
-        "Content-Type": "application/json"
-    }
-
+    
+    print("Calling Claude API...")
     response = requests.post(url, headers=headers, json=data)
-
+    
     if response.status_code == 200:
         result = response.json()
-        return result["candidates"][0]["content"]["parts"][0]["text"]
+        print("\n" + result['content'][0]['text'])
     else:
-        return f"Error: {response.text}"
+        print("API Error:", response.status_code, response.text)
 
-
-# ---- USER INPUT ----
-service = input("Enter service (nails, lashes, tattoo, etc): ")
-client_request = input("Enter client request: ")
-
-# ---- AI CALL ----
-output = get_ai_response(service, client_request)
-
-# ---- DISPLAY ----
-print("\n--- AI RESPONSE ---")
-print(output)
+if __name__ == "__main__":
+    if not API_KEY:
+        print("Error: ANTHROPIC_API_KEY environment variable not set.")
+        print("Run: $env:ANTHROPIC_API_KEY=\"your-key-here\"")
+    else:
+        service = input("Enter service: ")
+        client_request = input("Enter client request: ")
+        get_ai_response(service, client_request)
