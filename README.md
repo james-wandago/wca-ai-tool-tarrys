@@ -1,17 +1,16 @@
-# wca-ai-tool-tarrys
-AI-powered beauty and tattoo assistant for Tarrys Beauty Lounge
-## Project Overview
-An AI-powered tool designed for Tarrys Beauty Lounge to help clients choose tattoo designs and beauty treatments based on their preferences.
-## Features
-* **Design Suggestion:** Recommends tattoo styles based on user descriptions.
-* **Treatment Guide:** Explains beauty procedures and aftercare.
-* **AI Powered:** Uses OpenAI API with a custom R-T-C-C-O prompt.
-    ## How to Run
-1. Clone the repo.
-2. Install requirements: pip install
-3. Run the script: python main.py
-## The Team
-* **Project Lead:** [James Wandago]
-* **Developer:** [Isaiah Koyoni]
-* **Prompt Engineer:** [Brian kibet]
-* **Documentation & Testing:** [Boniface Karanja ]
+# WCA AI Tool - Tarrys Beauty Lounge
+
+**Team:** WALALA HOI AI TECH  
+**Prompt Engineer:** Brian Kibet  
+**Developer:** [Your Name]
+
+## Project Description
+AI assistant for Tarrys Beauty Lounge in Nairobi. Uses Claude API and R-T-C-C-O framework to recommend beauty/tattoo services, give KES pricing, and generate WhatsApp client messages.
+
+## How to Run
+1. Clone repo
+2. Add `ANTHROPIC_API_KEY` to `.env` file
+3. Run `python main.py`
+
+## API Used
+Anthropic Claude 3 Haiku
