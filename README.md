@@ -11,7 +11,7 @@ An AI-powered tool designed for Tarrys Beauty Lounge to help clients choose tatt
 2. Install requirements: pip install
 3. Run the script: python main.py
 ## The Team
-* **Project Lead:** [Wandago]
-* **Developer:** [Isiah]
-* **Prompt Engineer:** [kibet]
-* **Documentation & Testing:** [Boniface ]
+* **Project Lead:** [James Wandago]
+* **Developer:** [Isiah Koyoni]
+* **Prompt Engineer:** [Brian kibet]
+* **Documentation & Testing:** [Boniface Karanja ]
