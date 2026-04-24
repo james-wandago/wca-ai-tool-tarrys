@@ -2,7 +2,7 @@
 
 **Team:** WALALA HOI AI TECH  
 **Prompt Engineer:** Brian Kibet  
-**Developer:** [Your Name]
+**Developer:** Isaiah Koyani
 
 ## Project Description
 AI assistant for Tarrys Beauty Lounge in Nairobi. Uses Claude API and R-T-C-C-O framework to recommend beauty/tattoo services, give KES pricing, and generate WhatsApp client messages.
