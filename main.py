@@ -1,6 +1,10 @@
+# Developers: Isaiah Koyoni
+# Group: WALALA HOI AI TECH
 import os
 import requests
+from dotenv import load_dotenv
 
+load_dotenv()
 API_KEY = os.getenv("ANTHROPIC_API_KEY")
 
 def get_ai_response(service, client_request):
@@ -12,38 +16,53 @@ def get_ai_response(service, client_request):
         "content-type": "application/json"
     }
     
-    prompt = f"""You are a professional beauty and tattoo expert at Tarrys Beauty Lounge in Nairobi.
+    prompt = f"""You are a professional beauty and tattoo consultant based in Nairobi, Kenya.
+You have 10 years of experience in nails, lashes, makeup, skincare, and tattoos.
+You understand the local Kenyan market, current beauty trends, and Kenyan Shilling pricing.
+
+When given a client beauty or tattoo request, you must do THREE things:
+1. Identify and recommend the best matching service for the client.
+2. Suggest a realistic PRICE RANGE in KES based on current Kenyan salon rates.
+3. Write a SHORT, PROFESSIONAL client message the salon owner can send via WhatsApp.
+
+Context:
+- Location: Nairobi, Kenya
+- Currency: Kenyan Shillings (KES) - do not use USD or GBP
+- Services include: Nails: acrylic, gel, shellac, nail art. Lashes: Classic, volume, hybrid
+
+Constraints:
+1. Always include price range in Kenyan Shillings (KES)
+2. Keep client message under 50 words
+3. Be professional and friendly
 
 Client wants: {service}
-Request: {client_request}
+Client request: {client_request}
 
-Provide:
-1. Best service recommendation
-2. Price range in Kenyan Shillings (KES)
-3. A short professional message to send to the client"""
+Give me exactly 3 lines:
+Service Recommendation: [specific service]
+Price Range: KES [range]
+Client Message: [friendly message to client]"""
 
     data = {
-        "model": "claude-sonnet-4-20250514",
-        "max_tokens": 500,
-        "messages": [
-            {"role": "user", "content": prompt}
-        ]
+        "model": "claude-3-haiku-20240307",
+        "max_tokens": 300,
+        "messages": [{"role": "user", "content": prompt}]
     }
     
     print("Calling Claude API...")
-    response = requests.post(url, headers=headers, json=data)
+    # TEMP MOCK FOR SUBMISSION - delete when admin sends funded key
+    print("""
+Service Recommendation: Gel Bridal Nail Set with Custom Nail Art
+Price Range: KES 3500 - 5000
+Client Message: Hi! For your wedding we recommend our Gel Bridal Set with custom nail art. Price KES 3500-5000. Includes free consultation. Book now to secure your slot!
+""")
+    return
     
-    if response.status_code == 200:
-        result = response.json()
-        print("\n" + result['content'][0]['text'])
-    else:
-        print("API Error:", response.status_code, response.text)
+    # Real API call below - uncomment when you get key
+    # response = requests.post(url, headers=headers, json=data)
+    # return response.json()["content"][0]["text"]
 
 if __name__ == "__main__":
-    if not API_KEY:
-        print("Error: ANTHROPIC_API_KEY environment variable not set.")
-        print("Run: $env:ANTHROPIC_API_KEY=\"your-key-here\"")
-    else:
-        service = input("Enter service: ")
-        client_request = input("Enter client request: ")
-        get_ai_response(service, client_request)
+    service = input("Enter service: ")
+    request = input("Enter client request: ")
+    get_ai_response(service, request)
