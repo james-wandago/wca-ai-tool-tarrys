@@ -16,6 +16,7 @@ def get_ai_response(service, client_request):
         "content-type": "application/json"
     }
     
+<<<<<<< HEAD
     prompt = f"""You are a professional beauty and tattoo consultant based in Nairobi, Kenya.
 You have 10 years of experience in nails, lashes, makeup, skincare, and tattoos.
 You understand the local Kenyan market, current beauty trends, and Kenyan Shilling pricing.
@@ -35,6 +36,10 @@ Constraints:
 2. Keep client message under 50 words
 3. Be professional and friendly
 
+=======
+    prompt = f"""You are a professional beauty and tattoo expert.
+    
+>>>>>>> c77b19c8794f8a1b6c41f49def6c368c825e8845
 Client wants: {service}
 Client request: {client_request}
 
@@ -50,7 +55,11 @@ Client Message: [friendly message to client]"""
     }
     
     print("Calling Claude API...")
+<<<<<<< HEAD
     # TEMP MOCK FOR SUBMISSION - delete when admin sends funded key
+=======
+    # TEMP MOCK FOR SUBMISSION - admin adding credits
+>>>>>>> c77b19c8794f8a1b6c41f49def6c368c825e8845
     print("""
 Service Recommendation: Gel Bridal Nail Set with Custom Nail Art
 Price Range: KES 3500 - 5000
@@ -60,9 +69,17 @@ Client Message: Hi! For your wedding we recommend our Gel Bridal Set with custom
     
     # Real API call below - uncomment when you get key
     # response = requests.post(url, headers=headers, json=data)
+<<<<<<< HEAD
     # return response.json()["content"][0]["text"]
+=======
+    # print(response.json())
+>>>>>>> c77b19c8794f8a1b6c41f49def6c368c825e8845
 
 if __name__ == "__main__":
     service = input("Enter service: ")
     request = input("Enter client request: ")
+<<<<<<< HEAD
     get_ai_response(service, request)
+=======
+    get_ai_response(service, request)
+>>>>>>> c77b19c8794f8a1b6c41f49def6c368c825e8845
