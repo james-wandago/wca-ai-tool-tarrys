@@ -2,6 +2,8 @@
 
 **Team:** WALALA HOI AI TECH  
 **Prompt Engineer:** Brian Kibet  
+**Documentation & Testing:**  Boniface Karanja 
+**Team lead:** James Wandago
 **Developer:** Isaiah Koyani
 
 ## Project Description
