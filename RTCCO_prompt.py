@@ -1,6 +1,6 @@
 # Prompt Engineer: Brian Kibet
 # Project: Beauty and Tattoo AI Assistant  
-# Team: WALALA HOI AI TECH
+# Team: TATTOOS AND NAILS AI TECH
 # Date: 20/04/2026
 
 """
