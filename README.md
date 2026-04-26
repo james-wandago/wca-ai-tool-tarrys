@@ -1,6 +1,6 @@
 # WCA AI Tool - Tarrys Beauty Lounge
 
-**Team:** WALALA HOI AI TECH  
+**Team:** TATTOO AND NAILS AI TECH  
 **Prompt Engineer:** Brian Kibet  
 **Documentation & Testing:**  Boniface Karanja 
 **Team lead:** James Wandago
