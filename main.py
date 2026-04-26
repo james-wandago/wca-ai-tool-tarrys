@@ -1,5 +1,5 @@
 # Developers: Isaiah Koyoni
-# Group: WALALA HOI AI TECH
+# Group: TATTOOS AND NAILS AI TECH
 
 import requests
 import os
