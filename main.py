@@ -17,10 +17,10 @@ def get_business_info():
 
 def get_client_requirements():
     """Get client requirements from user"""
-    event_type = input("Enter event type: ")
-    budget = input("Enter budget range: ")
-    specific_needs = input("Enter specific needs: ")
-    return event_type, budget, specific_needs
+    business_name = input("Enter business name: ")
+    services = input("Enter budget range: ")
+    specific_needs = input("Enter serv needs: ")
+    return business_name, budget, specific_needs
 
 def generate_recommendation(business_name, services, target_market, event_type, budget, specific_needs):
     """Generate AI recommendation using Claude API"""
@@ -85,7 +85,7 @@ def main():
 
     # Generate recommendation
     print("\n=== Generating Recommendation ===")
-    recommendation = generate_recommendation(business_name, services, target_market, event_type, budget, specific_needs)
+    recommendation = generate_recommendation(business_name, services, target_market, event_type, budget,specific_needs)
 
     if recommendation:
         print("\n=== AI Recommendation ===")
