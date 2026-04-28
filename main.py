@@ -1,95 +1,45 @@
-# Developers: Isaiah Koyoni
-# Group: WALALA HOI AI TECH
-
-import requests
-import os
+import anthropic, json, os
 from dotenv import load_dotenv
-
-# Load environment variables
 load_dotenv()
 
-def get_business_info():
-    """Get business info from user"""
-    business_name = input("Enter business name: ")
-    services = input("Enter services offered: ")
-    target_market = input("Enter target market: ")
-    return business_name, services, target_market
+API_KEY = os.getenv("ANTHROPIC_API_KEY") or input("Key: ").strip()
+client = anthropic.Anthropic(api_key=API_KEY)
+MODEL = "claude-haiku-4-5-20251001" # Fixed: Current model name
 
-def get_client_requirements():
-    """Get client requirements from user"""
-    event_type = input("Enter event type: ")
-    budget = input("Enter budget range: ")
-    specific_needs = input("Enter specific needs: ")
-    return event_type, budget, specific_needs
+def build_prompt(req):
+    return f"""Return ONLY valid JSON for a Nairobi beauty salon. No text before or after JSON.
+{{"service_recommendation":"","price_range_kes":"X,XXX - X,XXX KES","duration_estimate":"","professional_message":"","notes":""}}
+CLIENT REQUEST: {req}"""
 
-def generate_recommendation(business_name, services, target_market, event_type, budget, specific_needs):
-    """Generate AI recommendation using Claude API"""
+def get_rec(req):
+    try:
+        resp = client.messages.create(model=MODEL,max_tokens=500,
+            messages=[{"role":"user","content":build_prompt(req)},
+                      {"role":"assistant","content":"{"}])
+        text = "{" + resp.content[0].text.strip()
+        text = text.replace("```json","").replace("```","").strip()
+        if not text.startswith("{"): text = "{" + text
+        if text.count("}") > 0: text = text[:text.rfind("}")+1]
+        return json.loads(text)
+    except Exception as e:
+        return {"service_recommendation":"Error","price_range_kes":"N/A",
+                "duration_estimate":"N/A","professional_message":f"Parse failed: {str(e)}","notes":""}
 
-    # Get API key from environment
-    api_key = os.getenv('ANTHROPIC_API_KEY')
-    if not api_key:
-        print("Error: ANTHROPIC_API_KEY not found in.env file")
-        return
-
-    # API endpoint and headers
-    url = "https://api.anthropic.com/v1/messages"
-    headers = {
-        "x-api-key": api_key,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json"
-    }
-
-    # Create prompt
-    prompt = f"""You are an AI assistant for {business_name}.
-
-Business Details:
-- Services: {services}
-- Target Market: {target_market}
-
-Client Requirements:
-- Event Type: {event_type}
-- Budget: {budget}
-- Specific Needs: {specific_needs}
-
-Give me exactly 3 lines:
-Service Recommendation: [specific service]
-Price Range: KES [range]
-Client Message: [friendly message to client]"""
-
-    data = {
-        "model": "claude-3-haiku-20240307",
-        "max_tokens": 300,
-        "messages": [{"role": "user", "content": prompt}]
-    }
-
-    print("Calling Claude API...")
-    # TEMP MOCK FOR SUBMISSION - delete when admin sends funded key
-    print("""Service Recommendation: Gel Bridal Nail Set with Custom Nail Art
-Price Range: KES 3500 - 5000
-Client Message: Hi! For your wedding we recommend our Gel Bridal Set with Custom Nail Art. The price range for this service is KES 3500 - 5000.""")
-    return
-
-    # Real API call below - uncomment when you get key
-    # response = requests.post(url, headers=headers, json=data)
-    # return response.json()["content"][0]["text"]
+def show(d):
+    print("\n=== AI RECOMMENDATION ===")
+    print(f"Service: {d.get('service_recommendation','N/A')}")
+    print(f"Price: {d.get('price_range_kes','N/A')}")
+    print(f"Duration: {d.get('duration_estimate','N/A')}")
+    print(f"\nWhatsApp Message:\n{d.get('professional_message','N/A')}")
+    if d.get('notes'): print(f"Notes: {d.get('notes')}")
+    print("="*40)
 
 def main():
-    """Main function"""
-    print("=== AI Business Recommendation Tool ===")
+    while True:
+        req = input("\nClient request: ") or "gel nails for wedding"
+        print("Thinking...")
+        show(get_rec(req))
+        if input("Another? yes/no: ").lower()!= 'yes': break
+    print("Goodbye!")
 
-    # Get business info
-    business_name, services, target_market = get_business_info()
-
-    # Get client requirements
-    event_type, budget, specific_needs = get_client_requirements()
-
-    # Generate recommendation
-    print("\n=== Generating Recommendation ===")
-    recommendation = generate_recommendation(business_name, services, target_market, event_type, budget, specific_needs)
-
-    if recommendation:
-        print("\n=== AI Recommendation ===")
-        print(recommendation)
-
-if __name__ == "__main__":
-    main()
+if __name__=="__main__": main()
