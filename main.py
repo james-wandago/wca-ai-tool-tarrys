@@ -4,7 +4,7 @@ load_dotenv()
 
 API_KEY = os.getenv("ANTHROPIC_API_KEY") or input("Key: ").strip()
 client = anthropic.Anthropic(api_key=API_KEY)
-MODEL = "claude-haiku-4-5-20251001" # Fixed: Current model name
+MODEL = "claude-haiku-4-5-20251001"
 
 def build_prompt(req):
     return f"""Return ONLY valid JSON for a Nairobi beauty salon. No text before or after JSON.

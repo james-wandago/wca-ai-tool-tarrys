@@ -1,8 +1,10 @@
 # WCA AI Tool - Tarrys Beauty Lounge
 
-**Team:** WALALA HOI AI TECH  
+**Team:** TATTOO AND NAILS AI TECH  
 **Prompt Engineer:** Brian Kibet  
-**Developer:** [Your Name]
+**Documentation & Testing:**  Boniface Karanja 
+**Team lead:** James Wandago
+**Developer:** Isaiah Koyani
 
 ## Project Description
 AI assistant for Tarrys Beauty Lounge in Nairobi. Uses Claude API and R-T-C-C-O framework to recommend beauty/tattoo services, give KES pricing, and generate WhatsApp client messages.
