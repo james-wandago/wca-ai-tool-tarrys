@@ -7,7 +7,7 @@ client = anthropic.Anthropic(api_key=API_KEY)
 MODEL = "claude-haiku-4-5-20251001"
 
 def build_prompt(req):
-    return f"""Return ONLY valid JSON for a Nairobi beauty salon. No text before or after JSON.
+    return f"""You are a Nairobi beauty salon AI. Return ONLY valid JSON. Recommend a NEW SERVICE to perform, not removal/fixing, unless client explicitly asks for removal.
 {{"service_recommendation":"","price_range_kes":"X,XXX - X,XXX KES","duration_estimate":"","professional_message":"","notes":""}}
 CLIENT REQUEST: {req}"""
 
